@@ -1,3 +1,5 @@
+import category.Category;
+
 import java.util.Scanner;
 
 public class Main {
@@ -30,7 +32,10 @@ public class Main {
             int menuSelection = scanner.nextInt();
 
             switch (menuSelection){
-                case 0:
+                case 0: //list categories
+                    for(Category category : StaticConstants.CATEGORY_LIST){
+                        System.out.println("Category Code:" + category.generateCategoryCode() + " category name:" + category.getName());
+                    }
                     break;
                 case 1:
                     break;
@@ -48,6 +53,8 @@ public class Main {
                     break;
                 case 8:
                     break;
+                case 9:
+                    break;
             }
 
 
@@ -58,7 +65,7 @@ public class Main {
     }
 
     private static String[] prepareMenuOptions(){
-        return new String[]{"List Categories","List Products","List Discount","See Balance","Add Balance" +
+        return new String[]{"List Categories","List Products","List Discount","See Balance","Add Balance",
                 "Place an order","See Cart","See order details","See your address","Close App"};
     }
 
