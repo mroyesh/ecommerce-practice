@@ -38,9 +38,14 @@ public class Main {
                     }
                     break;
                 case 1: //list products  //product name, product category name
-                    for(Product product : StaticConstants.PRODUCT_LIST){
-                        System.out.println("Product Name:" + product.getName() + "Product Category Name:" + product.getCategoryName());
+                    try{
+                        for(Product product : StaticConstants.PRODUCT_LIST){
+                            System.out.println("Product Name:" + product.getName() + "Product Category Name:" + product.getCategoryName());
+                        }
+                    }catch(Exception e){
+                        System.out.println("Product could not printed because category not found for product name:" + e.getMessage().split(",")[1] );
                     }
+
                     break;
                 case 2:
 
