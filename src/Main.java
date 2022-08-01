@@ -111,7 +111,7 @@ public class Main {
                             Product product = findProductById(productId);
                             if (!putItemToCartIfStockAvailable(cart, product)) {
                                 System.out.println("Stock is insufficient. Please try again");
-                                continue;;
+                                continue;
                             }
                         } catch (Exception e) {
                             System.out.println("Product does not exist. please try again");
@@ -138,6 +138,26 @@ public class Main {
 
 
         }
+
+    }
+
+    private static boolean putItemToCartIfStockAvailable(Cart cart, Product product) {
+
+        System.out.println("Please provide product count:");
+        Scanner scanner = new Scanner(System.in);
+        int count = scanner.nextInt();
+
+        Integer cartCount = cart.getProductMap().get(product);
+
+        if(cartCount !=null && product.getRemainingStock() > cartCount+count){
+            cart.getProductMap().put(product,cartCount+count);
+            return true;
+
+        }else if(product.getRemainingStock()>=count){
+            cart.getProductMap().put(product,count);
+            return true;
+        }
+        return false;
 
     }
 
