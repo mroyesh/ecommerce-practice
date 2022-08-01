@@ -132,6 +132,8 @@ public class Main {
                             break;
                         }
                     }
+
+
                     System.out.println("seems there are discount options. Do you want to see and apply to your cart if it is applicable. For no discount type no");
                     for (Discount discount : DISCOUNT_LIST) {
                         System.out.println("discount id " + discount.getId() + " discount name: " + discount.getName());
@@ -174,6 +176,7 @@ public class Main {
                     printOrdersByCustomerId(customer.getId());
                     break;
                 case 8:
+                    printAddressByCustomerId(customer);
                     break;
                 case 9:
                     System.exit(1);
@@ -205,6 +208,14 @@ public class Main {
             if (order.getCustomerId().toString().equals(customerId.toString())) {
                 System.out.println("Order status: " + order.getOrderStatus() + " order amount " + order.getPaidAmount() + " order date " + order.getOrderDate());
             }
+        }
+    }
+
+    private static void printAddressByCustomerId(Customer customer) {
+        for (Address address : customer.getAddress()) {
+            System.out.println(" Street Name: " + address.getStreetName() +
+                    " Street Number: " + address.getStreetNumber() + "ZipCode:  "
+                    + address.getZipCode() + " State: " + address.getState());
         }
     }
 

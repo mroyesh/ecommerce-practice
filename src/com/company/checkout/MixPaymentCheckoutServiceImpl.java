@@ -16,6 +16,15 @@ public class MixPaymentCheckoutServiceImpl implements CheckoutService{
     public boolean checkout(Customer customer, Double totalAmount) {
         try {
             GiftCardBalance giftCardBalance = findGiftCardBalance(customer.getId());
+
+            // 300 giftcard balance
+            // 450 customer balance
+            // 600 cart
+
+            // 300 - 600 = -300
+
+            // 300 + 450 - 600 = 150
+
             final double giftBalance = giftCardBalance.getBalance() - totalAmount;
             if (giftBalance > 0 ){
                 giftCardBalance.setBalance(giftBalance);
