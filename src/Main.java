@@ -105,6 +105,18 @@ public class Main {
                                 System.out.println(e.getMessage());;
                             }
                         }
+                        String productId = scanner.next();
+
+                        try {
+                            Product product = findProductById(productId);
+                            if (!putItemToCartIfStockAvailable(cart, product)) {
+                                //BREAK TILL 2:20 pm (5 min read the code)
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Product does not exist. please try again");
+                            continue;
+                        }
+
 
                     }
 
@@ -122,6 +134,15 @@ public class Main {
 
         }
 
+    }
+
+    private static Product findProductById(String productId) throws Exception {
+        for(Product product : StaticConstants.PRODUCT_LIST){
+            if (product.getId().toString().equals(productId)) {
+                return product;
+            }
+        }
+        throw new Exception("Product not found");
     }
 
 
