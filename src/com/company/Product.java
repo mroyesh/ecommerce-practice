@@ -1,6 +1,7 @@
-import category.Category;
+package com.company;
 
-import java.math.BigDecimal;
+import com.company.category.Category;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -22,6 +23,8 @@ public class Product {
         this.categoryId = categoryId;
     }
 
+
+
     public UUID getId() {
         return id;
     }
@@ -42,6 +45,9 @@ public class Product {
         return remainingStock;
     }
 
+    public void setRemainingStock(Integer remainingStock) {
+        this.remainingStock = remainingStock;
+    }
     public UUID getCategoryId() {
         return categoryId;
     }
