@@ -55,7 +55,8 @@ public class Product {
     public String getCategoryName() throws Exception {
 
         for(Category category : StaticConstants.CATEGORY_LIST){
-            if(getCategoryId().toString().equals(category.getId().toString())){
+           // if(getCategoryId().toString().equals(category.getId().toString())){
+            if(getCategoryId().equals(category.getId())){
                 return category.getName();
             }
         }

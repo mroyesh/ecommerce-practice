@@ -18,7 +18,6 @@ public class OrderServiceImpl implements OrderService{
     public String placeOrder(Cart cart) {
         double amountAfterDiscount = cart.calculateCartTotalAmount();
 
-
         if (cart.getDiscountId() != null){
             try {
                 Discount discount = findDiscountById(cart.getDiscountId());
