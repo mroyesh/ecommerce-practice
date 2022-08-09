@@ -15,7 +15,7 @@ public class MixPaymentCheckoutServiceImpl implements CheckoutService{
     @Override
     public boolean checkout(Customer customer, Double totalAmount) {
         try {
-            GiftCardBalance giftCardBalance = CheckoutService.findGiftCardBalance(customer.getId());
+            GiftCardBalance giftCardBalance = findGiftCardBalance(customer.getId());
 
             // 300 giftcard balance
             // 450 customer balance
@@ -29,7 +29,7 @@ public class MixPaymentCheckoutServiceImpl implements CheckoutService{
             if (giftBalance > 0 ){
                 giftCardBalance.setBalance(giftBalance);
             }else {
-                CustomerBalance customerBalance = CheckoutService.findCustomerBalance(customer.getId());
+                CustomerBalance customerBalance = findCustomerBalance(customer.getId());
                 final double mixBalance = giftCardBalance.getBalance() + customerBalance.getBalance() - totalAmount;
                 if (mixBalance > 0){
                     giftCardBalance.setBalance(0d);
@@ -44,5 +44,29 @@ public class MixPaymentCheckoutServiceImpl implements CheckoutService{
 
         return false;
     }
+    private static GiftCardBalance findGiftCardBalance(UUID customerId){
+        for(Balance giftCarBalance : StaticConstants.GIFT_CARD_BALANCE_LIST){
+            if(giftCarBalance.getCustomerId().toString().equals(customerId.toString())){
+                return  (GiftCardBalance) giftCarBalance;
+            }
+        }
 
+        GiftCardBalance giftCarBalance = new GiftCardBalance(customerId,0d);
+        StaticConstants.GIFT_CARD_BALANCE_LIST.add(giftCarBalance);
+
+        return giftCarBalance;
+    }
+
+    private static CustomerBalance findCustomerBalance(UUID customerId){
+        for(Balance customerBalance : StaticConstants.CUSTOMER_BALANCE_LIST){
+            if(customerBalance.getCustomerId().toString().equals(customerId.toString())){
+                return (CustomerBalance) customerBalance;
+            }
+        }
+
+        CustomerBalance customerBalance = new CustomerBalance(customerId,0d);
+        StaticConstants.CUSTOMER_BALANCE_LIST.add(customerBalance);
+
+        return customerBalance;
+    }
 }

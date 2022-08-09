@@ -1,9 +1,9 @@
 package com.company;
 
+import com.company.balance.Balance;
 import com.company.balance.CustomerBalance;
 import com.company.balance.GiftCardBalance;
 import com.company.category.Category;
-import com.company.checkout.CheckoutService;
 import com.company.discount.Discount;
 import com.company.order.Order;
 import com.company.order.OrderService;
@@ -72,8 +72,8 @@ public class Main {
                     break;
 
                 case 3:  // See Balance
-                    CustomerBalance cBalance = CheckoutService.findCustomerBalance(customer.getId());
-                    GiftCardBalance gBalance = CheckoutService.findGiftCardBalance(customer.getId());
+                    CustomerBalance cBalance = findCustomerBalance(customer.getId());
+                    GiftCardBalance gBalance = findGiftCardBalance(customer.getId());
                     double totalBalance = cBalance.getBalance() + gBalance.getBalance();
                     System.out.println("Total Balance:" + totalBalance);
                     System.out.println("Customer Balance:" + cBalance.getBalance());
@@ -81,8 +81,8 @@ public class Main {
                     break;
 
                 case 4: // Add Balance
-                    CustomerBalance customerBalance = CheckoutService.findCustomerBalance(customer.getId());
-                    GiftCardBalance giftCardBalance = CheckoutService.findGiftCardBalance(customer.getId());
+                    CustomerBalance customerBalance = findCustomerBalance(customer.getId());
+                    GiftCardBalance giftCardBalance = findGiftCardBalance(customer.getId());
                     System.out.println("Which Account would you like to add?");
                     System.out.println("Type 1 for Customer Balance:" + customerBalance.getBalance());
                     System.out.println("Type 2 for Gift Card Balance:" + giftCardBalance.getBalance());
@@ -139,32 +139,34 @@ public class Main {
                         }
                     }
 
-                    System.out.println("seems there are discount options. Do you want to see and apply to your cart if it is applicable. " +
-                            "For no discount, type no");
-                    for (Discount discount : DISCOUNT_LIST) {
-                        System.out.println("discount id " + discount.getId() + " discount name: " + discount.getName());
-                    }
-                    String discountId = scanner.next();
-
-                    OrderService orderService = new OrderServiceImpl();
-                    if (!discountId.equals("no")) {
-                        try {
-                            Discount discount = findDiscountById(discountId);
-                            if (discount.decideDiscountIsApplicableToCart(cart)) {
-                                cart.setDiscountId(discount.getId());
-                            }
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
+                    if ( !(cart.getProductMap().isEmpty()) ) {  // added after live session
+                        System.out.println("seems there are discount options. Do you want to see and apply to your cart if it is applicable. " +
+                                "For no discount, type no");
+                        for (Discount discount : DISCOUNT_LIST) {
+                            System.out.println("discount id " + discount.getId() + " discount name: " + discount.getName());
                         }
-                    }
-                    String result = orderService.placeOrder(cart);
-                    if (result.equals("Order has been placed successfully")) {
-                        System.out.println("Order is successful");
-                        updateProductStock(cart.getProductMap());
-                        cart.setProductMap(new HashMap<>());
-                        cart.setDiscountId(null);
-                    } else {
-                        System.out.println(result);
+                        String discountId = scanner.next();
+
+                        OrderService orderService = new OrderServiceImpl();
+                        if (!discountId.equals("no")) {
+                            try {
+                                Discount discount = findDiscountById(discountId);
+                                if (discount.decideDiscountIsApplicableToCart(cart)) {
+                                    cart.setDiscountId(discount.getId());
+                                }
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                        String result = orderService.placeOrder(cart);
+                        if (result.equals("Order has been placed successfully")) {
+                            System.out.println("Order is successful");
+                            updateProductStock(cart.getProductMap());
+                            cart.setProductMap(new HashMap<>());
+                            cart.setDiscountId(null);
+                        } else {
+                            System.out.println(result);
+                        }
                     }
                     break;
 
@@ -252,32 +254,31 @@ public class Main {
         throw new Exception("Product not found");
     }
 
+    private static CustomerBalance findCustomerBalance(UUID customerId) {
+        for (Balance customerBalance : StaticConstants.CUSTOMER_BALANCE_LIST) {
+            if (customerBalance.getCustomerId().toString().equals(customerId.toString())) {
+                return (CustomerBalance) customerBalance;
+            }
+        }
 
-//    private static CustomerBalance findCustomerBalance(UUID customerId) {
-//        for (Balance customerBalance : StaticConstants.CUSTOMER_BALANCE_LIST) {
-//            if (customerBalance.getCustomerId().toString().equals(customerId.toString())) {
-//                return (CustomerBalance) customerBalance;
-//            }
-//        }
-//
-//        CustomerBalance customerBalance = new CustomerBalance(customerId, 0d);
-//        StaticConstants.CUSTOMER_BALANCE_LIST.add(customerBalance);
-//
-//        return customerBalance;
-//    }
+        CustomerBalance customerBalance = new CustomerBalance(customerId, 0d);
+        StaticConstants.CUSTOMER_BALANCE_LIST.add(customerBalance);
 
-//    private static GiftCardBalance findGiftCardBalance(UUID customerId) {
-//        for (Balance giftCarBalance : StaticConstants.GIFT_CARD_BALANCE_LIST) {
-//            if (giftCarBalance.getCustomerId().toString().equals(customerId.toString())) {
-//                return (GiftCardBalance) giftCarBalance;
-//            }
-//        }
-//
-//        GiftCardBalance giftCarBalance = new GiftCardBalance(customerId, 0d);
-//        StaticConstants.GIFT_CARD_BALANCE_LIST.add(giftCarBalance);
-//
-//        return giftCarBalance;
-//    }
+        return customerBalance;
+    }
+
+    private static GiftCardBalance findGiftCardBalance(UUID customerId) {
+        for (Balance giftCarBalance : StaticConstants.GIFT_CARD_BALANCE_LIST) {
+            if (giftCarBalance.getCustomerId().toString().equals(customerId.toString())) {
+                return (GiftCardBalance) giftCarBalance;
+            }
+        }
+
+        GiftCardBalance giftCarBalance = new GiftCardBalance(customerId, 0d);
+        StaticConstants.GIFT_CARD_BALANCE_LIST.add(giftCarBalance);
+
+        return giftCarBalance;
+    }
 
 
     private static String[] prepareMenuOptions() {
