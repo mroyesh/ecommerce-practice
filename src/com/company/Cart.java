@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Map;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class Cart {
@@ -50,4 +51,25 @@ public class Cart {
     public void setProductMap(Map<Product, Integer> productMap) {
         this.productMap = productMap;
     }
+
+    public static boolean putItemToCartIfStockAvailable(Cart cart, Product product) {
+
+        System.out.println("Please provide product count:");
+        Scanner scanner = new Scanner(System.in);
+        int count = scanner.nextInt();
+
+        Integer cartCount = cart.getProductMap().get(product);
+
+        if (cartCount != null && product.getRemainingStock() > cartCount + count) {
+            cart.getProductMap().put(product, cartCount + count);
+            return true;
+
+        } else if (product.getRemainingStock() >= count) {
+            cart.getProductMap().put(product, count);
+            return true;
+        }
+        return false;
+
+    }
+
 }

@@ -35,4 +35,16 @@ public class Address {
     public String getState() {
         return state;
     }
+
+    public static void printAddressByCustomerId(Customer customer) {
+        if (!customer.getAddress().isEmpty()) {
+            for (Address address : customer.getAddress()) {
+                System.out.println(" Street Name: " + address.getStreetName() +
+                        " Street Number: " + address.getStreetNumber() + "ZipCode:  "
+                        + address.getZipCode() + " State: " + address.getState());
+            }
+        } else {
+            System.out.println("You don't have an address yet");
+        }
+    }
 }

@@ -3,7 +3,10 @@ package com.company;
 import com.company.category.Category;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.UUID;
+
+import static com.company.StaticConstants.PRODUCT_LIST;
 
 public class Product {
 
@@ -22,7 +25,6 @@ public class Product {
         this.remainingStock = remainingStock;
         this.categoryId = categoryId;
     }
-
 
 
     public UUID getId() {
@@ -48,29 +50,59 @@ public class Product {
     public void setRemainingStock(Integer remainingStock) {
         this.remainingStock = remainingStock;
     }
+
     public UUID getCategoryId() {
         return categoryId;
     }
 
     public String getCategoryName() throws Exception {
 
-        for(Category category : StaticConstants.CATEGORY_LIST){
-           // if(getCategoryId().toString().equals(category.getId().toString())){
-            if(getCategoryId().equals(category.getId())){
+        for (Category category : StaticConstants.CATEGORY_LIST) {
+            // if(getCategoryId().toString().equals(category.getId().toString())){
+            if (getCategoryId().equals(category.getId())) {
                 return category.getName();
             }
         }
         throw new Exception("Category not found," + getName());
-
     }
 
     public LocalDateTime getDeliveryDueDate() throws Exception {
-        for(Category category : StaticConstants.CATEGORY_LIST){
-            if(getCategoryId().toString().equals(category.getId().toString())){
+        for (Category category : StaticConstants.CATEGORY_LIST) {
+       //     if (getCategoryId().toString().equals(category.getId().toString())) {
+            if (getCategoryId().equals(category.getId())) {
                 return category.findDeliveryDueDate();
             }
         }
         throw new Exception("Category could not find");
+    }
+
+    public static void updateProductStock(Map<Product, Integer> map) {
+        for (Product product : map.keySet()) {
+            product.setRemainingStock(product.getRemainingStock() - map.get(product));
+        }
+    }
+
+    public static Product findProductById(String productId) throws Exception {
+        for (Product product : PRODUCT_LIST) {
+            if (product.getId().toString().equals(productId)) {
+                return product;
+            }
+        }
+        throw new Exception("Product not found");
+    }
+
+    public static void listDetailsOfProducts(){
+        for (Product product : PRODUCT_LIST) {
+            try {
+                System.out.println(
+                        "id:" + product.getId() + " price: " + product.getPrice() +
+                                " product category: " + product.getCategoryName() +
+                                " available stock: " + product.getRemainingStock() +
+                                " product delivery due: " + product.getDeliveryDueDate());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
 

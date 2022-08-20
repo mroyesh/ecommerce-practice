@@ -10,19 +10,18 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.UUID;
 
-import static com.company.StaticConstants.DISCOUNT_LIST;
 import static com.company.StaticConstants.ORDER_LIST;
 
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
     @Override
     public String placeOrder(Cart cart) {
         double amountAfterDiscount = cart.calculateCartTotalAmount();
 
-        if (cart.getDiscountId() != null){
+        if (cart.getDiscountId() != null) {
             try {
-                Discount discount = findDiscountById(cart.getDiscountId());
+                Discount discount = Discount.findDiscountById(cart.getDiscountId().toString());
                 amountAfterDiscount = discount.calculateCartAmountAfterDiscountApplied(amountAfterDiscount);
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -31,7 +30,7 @@ public class OrderServiceImpl implements OrderService{
         System.out.println("which payment option you would like to choose, Type 1 : customer balance, Type 2 : Mix (gift card + customer balance)");
         int paymentType = scanner.nextInt();
         boolean checkoutResult = false;
-        switch (paymentType){
+        switch (paymentType) {
             case 1:
                 CheckoutService customerBalanceCheckoutService = new CustomerBalanceCheckoutServiceImpl();
                 checkoutResult = customerBalanceCheckoutService.checkout(cart.getCustomer(), amountAfterDiscount);
@@ -42,25 +41,27 @@ public class OrderServiceImpl implements OrderService{
                 break;
         }
 
-
-        if (checkoutResult){
+        if (checkoutResult) {
             Order order = new Order(UUID.randomUUID(), LocalDateTime.now(),
                     cart.calculateCartTotalAmount(), amountAfterDiscount,
                     cart.calculateCartTotalAmount() - amountAfterDiscount, cart.getCustomer().getId()
                     , "Placed", cart.getProductMap().keySet());
             ORDER_LIST.add(order);
             return "Order has been placed successfully";
-        }else {
+        } else {
             return "Balance is insufficient. Please add money to your one of balances and try again.";
         }
     }
 
-    private Discount findDiscountById(UUID discountId) throws Exception {
-        for (Discount discount : DISCOUNT_LIST){
-            if (discount.getId().toString().equals(discountId.toString())){
-                return discount;
+    public static void printOrdersByCustomerId(UUID customerId) {
+        if (!ORDER_LIST.isEmpty()) {        // added
+            for (Order order : ORDER_LIST) {
+                if (order.getCustomerId().toString().equals(customerId.toString())) {
+                    System.out.println("Order status: " + order.getOrderStatus() + " order amount " + order.getPaidAmount() + " order date " + order.getOrderDate());
+                }
             }
+        } else {
+            System.out.println("You don't have any previous order.");
         }
-        throw new Exception("Discount couldn't found");
     }
 }
