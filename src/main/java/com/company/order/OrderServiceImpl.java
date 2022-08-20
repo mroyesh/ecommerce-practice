@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
     public static void printOrdersByCustomerId(UUID customerId) {
         if (!ORDER_LIST.isEmpty()) {        // added
             for (Order order : ORDER_LIST) {
-                if (order.getCustomerId().toString().equals(customerId.toString())) {
+                if (order.getCustomerId().equals(customerId)) {
                     System.out.println("Order status: " + order.getOrderStatus() + " order amount " + order.getPaidAmount() + " order date " + order.getOrderDate());
                 }
             }

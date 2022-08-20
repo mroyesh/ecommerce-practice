@@ -91,17 +91,19 @@ public class Product {
         throw new Exception("Product not found");
     }
 
-    public static void listDetailsOfProducts(){
-        for (Product product : PRODUCT_LIST) {
-            try {
-                System.out.println(
-                        "id:" + product.getId() + " price: " + product.getPrice() +
-                                " product category: " + product.getCategoryName() +
-                                " available stock: " + product.getRemainingStock() +
-                                " product delivery due: " + product.getDeliveryDueDate());
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+    @Override
+    public String toString() {
+        try {
+            return "Product{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", price=" + price +
+                    ", available stock=" + remainingStock +
+                    ", product delivery due=" + getDeliveryDueDate() +
+                    ", category=" + getCategoryName() +
+                    '}';
+        } catch (Exception e) {
+           return e.getMessage() + " for : " + name;
         }
     }
 }

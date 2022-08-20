@@ -95,7 +95,9 @@ public class MainMenu {
                     }
                     while (true) {
                         System.out.println("Which product you want to add to your cart? Type 'exit' to continue without adding new item");
-                        Product.listDetailsOfProducts();
+                        for (Product product : PRODUCT_LIST) {
+                            System.out.println(product);
+                        }
                         String productId = scanner.next();
                         if (productId.equalsIgnoreCase("exit")) {      // added after live session
                             break;

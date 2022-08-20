@@ -53,7 +53,6 @@ public class Cart {
     }
 
     public static boolean putItemToCartIfStockAvailable(Cart cart, Product product) {
-
         System.out.println("Please provide product count:");
         Scanner scanner = new Scanner(System.in);
         int count = scanner.nextInt();
@@ -69,7 +68,6 @@ public class Cart {
             return true;
         }
         return false;
-
     }
 
 }
