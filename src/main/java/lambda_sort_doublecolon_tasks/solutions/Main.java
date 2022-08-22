@@ -38,7 +38,7 @@ public class Main {
         System.out.println("***get all employees whose company name info starts with A or a");
         System.out.println(filter(getAllEmployees(), employee -> employee.getCompany().getCompanyName().substring(0, 1).equalsIgnoreCase("A")));
 
-        System.out.println("*** get all employees their company is located in Utah Indiana or California as a state ");
+        System.out.println("*** get all employees their company is located in Utah, Indiana or California as a state ");
         System.out.println(filter(getAllEmployees(), employee ->
                 employee.getCompany().getAddress().getState().equals("Utah") ||
                         employee.getCompany().getAddress().getState().equals("Indiana") ||

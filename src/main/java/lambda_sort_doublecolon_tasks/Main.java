@@ -17,7 +17,7 @@ public class Main {
 
         //EXAMPLE
         System.out.println("***get all employees if their Id number is odd");
-        System.out.println(filter(getAllEmployees(),employee -> employee.getId()%2!=0));
+        System.out.println(filter(getAllEmployees(),employee -> employee.getId()%2!=0) );
 
 
         //System.out.println("***get all employees if their Id number is even");
