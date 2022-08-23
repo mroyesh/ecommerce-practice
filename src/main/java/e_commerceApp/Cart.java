@@ -21,6 +21,7 @@ public class Cart {
     }
 
     public Double calculateCartTotalAmount(){
+        // todo convert this block to stream
         double totalAmount=0;
         for(Product product : productMap.keySet()){
             totalAmount += product.getPrice() * productMap.get(product);

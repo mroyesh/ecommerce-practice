@@ -38,6 +38,7 @@ public class Address {
 
     public static void printAddressByCustomerId(Customer customer) {
         if (!customer.getAddress().isEmpty()) {
+            // todo convert for loop to forEach()
             for (Address address : customer.getAddress()) {
                 System.out.println(" Street Name: " + address.getStreetName() +
                         " Street Number: " + address.getStreetNumber() + "ZipCode:  "

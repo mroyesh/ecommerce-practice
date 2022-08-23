@@ -35,7 +35,7 @@ public class Main {
         //System.out.println("***get all employees whose company name info starts with A or a");
 
 
-        //System.out.println("*** get all employees their company is located in Utah Indiana or California as a state ");
+        //System.out.println("*** get all employees their company is located in Utah, Indiana or California as a state ");
 
 
         //System.out.println("get all companies if the company name consist of ,");

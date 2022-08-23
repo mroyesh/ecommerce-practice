@@ -5,6 +5,9 @@ import lambda_sort_doublecolon_tasks.Gender;
 import lambda_sort_doublecolon_tasks.PromotedEmployee;
 import lambda_sort_doublecolon_tasks.Role;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static lambda_sort_doublecolon_tasks.DataGenerator.*;
 import static lambda_sort_doublecolon_tasks.solutions.Service.*;
 
@@ -56,6 +59,12 @@ public class Main {
 
         System.out.println("show all the employees full name and corresponding age information in one list");
         System.out.println(getSpecificAttributes(getAllEmployees(), employee -> employee.getFullName() + " | " + employee.getAge()));
+
+        List<String> list = getAllEmployees().stream()
+                .map(employee -> employee.getFullName() + " | " + employee.getAge())
+                .collect(Collectors.toList());
+        System.out.println(list);
+
 
         System.out.println("show all the employees street city and state information with their age in one list");
         System.out.println(getSpecificAttributes(getAllEmployees(), employee -> employee.getCompany().getAddress().getStreet() + " | " +

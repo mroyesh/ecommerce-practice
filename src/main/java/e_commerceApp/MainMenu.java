@@ -32,6 +32,7 @@ public class MainMenu {
 
             switch (menuSelection) {
                 case 0: //list categories
+                    // todo convert for loop to forEach()
                     for (Category category : CATEGORY_LIST) {
                         System.out.println("Category Code:" + category.generateCategoryCode() + " category name:" + category.getName());
                     }
@@ -39,6 +40,7 @@ public class MainMenu {
 
                 case 1: //list products  //product name, product category name
                     try {
+                        // todo convert for loop to forEach()
                         for (Product product : PRODUCT_LIST) {
                             System.out.println("Product Name:" + product.getName() + "Product Category Name: " + product.getCategoryName());
                         }
@@ -48,6 +50,7 @@ public class MainMenu {
                     break;
 
                 case 2: //list discounts
+                    // todo convert for loop to forEach()
                     for (Discount discount : DISCOUNT_LIST) {
                         System.out.println("Discount Name: " + discount.getName() + "  discount threshold amount: " + discount.getThresholdAmount());
                     }
@@ -95,6 +98,7 @@ public class MainMenu {
                     }
                     while (true) {
                         System.out.println("Which product you want to add to your cart? Type 'exit' to continue without adding new item");
+                        // todo convert for loop to forEach()
                         for (Product product : PRODUCT_LIST) {
                             System.out.println(product);
                         }
@@ -146,6 +150,7 @@ public class MainMenu {
                 case 7:     // See Cart
                     if (cart.getProductMap() != null) {  // modified from !cart.getProductMap().keySet().isEmpty()
                         System.out.println("Your Cart: ");
+                        // todo convert for loop to forEach()
                         for (Product product : cart.getProductMap().keySet()) {
                             System.out.println("product name: " + product.getName() + " count: " + cart.getProductMap().get(product)
                                     + " total price: " + product.getPrice() * cart.getProductMap().get(product));   // added after live session

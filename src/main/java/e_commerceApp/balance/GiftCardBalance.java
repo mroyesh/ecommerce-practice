@@ -19,6 +19,7 @@ public class GiftCardBalance extends Balance{
     }
 
     public static GiftCardBalance findGiftCardBalance(UUID customerId) {
+        // todo convert this block to stream
         for (Balance giftCarBalance : GIFT_CARD_BALANCE_LIST) {
             if (giftCarBalance.getCustomerId().equals(customerId)) {
                 return (GiftCardBalance) giftCarBalance;

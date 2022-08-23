@@ -56,7 +56,7 @@ public class Product {
     }
 
     public String getCategoryName() throws Exception {
-
+        // todo convert this block to stream
         for (Category category : StaticConstants.CATEGORY_LIST) {
             // if(getCategoryId().toString().equals(category.getId().toString())){
             if (getCategoryId().equals(category.getId())) {
@@ -67,6 +67,7 @@ public class Product {
     }
 
     public LocalDateTime getDeliveryDueDate() throws Exception {
+        // todo convert this block to stream
         for (Category category : StaticConstants.CATEGORY_LIST) {
        //     if (getCategoryId().toString().equals(category.getId().toString())) {
             if (getCategoryId().equals(category.getId())) {
@@ -77,12 +78,14 @@ public class Product {
     }
 
     public static void updateProductStock(Map<Product, Integer> map) {
+        // todo convert for loop to forEach()
         for (Product product : map.keySet()) {
             product.setRemainingStock(product.getRemainingStock() - map.get(product));
         }
     }
 
     public static Product findProductById(String productId) throws Exception {
+        // todo convert this block to stream
         for (Product product : PRODUCT_LIST) {
             if (product.getId().toString().equals(productId)) {
                 return product;

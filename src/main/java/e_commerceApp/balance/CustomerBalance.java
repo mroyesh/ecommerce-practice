@@ -17,6 +17,7 @@ public class CustomerBalance extends Balance{
     }
 
     public static CustomerBalance findCustomerBalance(UUID customerId) {
+        // todo convert this block to stream
         for (Balance customerBalance : CUSTOMER_BALANCE_LIST) {
             if (customerBalance.getCustomerId().equals(customerId)) {
                 return (CustomerBalance) customerBalance;
