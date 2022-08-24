@@ -2,3 +2,4 @@
 *.iml
 /target/
 /.idea/
+/src/main/java/lambda_sort_doublecolon_tasks/solutions/MeetingPractice_Solutions.java
