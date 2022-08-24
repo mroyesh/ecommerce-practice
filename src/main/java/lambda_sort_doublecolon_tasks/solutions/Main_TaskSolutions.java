@@ -21,7 +21,6 @@ public class Main_TaskSolutions {
 
         //When you start to solve new question, comment out the System.out.println statement
 
-
         //EXAMPLE
         System.out.println("***get all employees if their Id number is odd");
         System.out.println(filter(getAllEmployees(), employee -> employee.getId() % 2 != 0));
@@ -100,24 +99,24 @@ public class Main_TaskSolutions {
 
         System.out.println("***SORTING QUESTIONS*** AFTER YOU HAVE DONE THE SORTING TASKS COMMENT YOUR CODE TO UNDERSTAND THE RESULT OF UPCOMING TASK");
 
-//        System.out.println("***sort all employees with id in ascending order***");
-//        getAllEmployees().sort(Comparator.comparing(Employee::getId));
-//        System.out.println(getAllEmployees());
+        System.out.println("***sort all employees with id in ascending order***");
+        getAllEmployees().sort(Comparator.comparing(Employee::getId));
+        System.out.println(getAllEmployees());
 
-//        System.out.println("***sort all employees with id in descending order***");
-//        getAllEmployees().sort(Comparator.comparing(Employee::getId).reversed());
-//        System.out.println(getAllEmployees());
+        System.out.println("***sort all employees with id in descending order***");
+        getAllEmployees().sort(Comparator.comparing(Employee::getId).reversed());
+        System.out.println(getAllEmployees());
 
-//        System.out.println("sort all employees with age in ascending order");
-//        getAllEmployees().sort(Comparator.comparing(Employee::getAge));
-//        System.out.println(getAllEmployees());
+        System.out.println("sort all employees with age in ascending order");
+        getAllEmployees().sort(Comparator.comparing(Employee::getAge));
+        System.out.println(getAllEmployees());
 
-//        System.out.println("sort all employees with age in descending order");
-//        getAllEmployees().sort(Comparator.comparing(Employee::getAge).reversed());
-//        System.out.println(getAllEmployees());
+        System.out.println("sort all employees with age in descending order");
+        getAllEmployees().sort(Comparator.comparing(Employee::getAge).reversed());
+        System.out.println(getAllEmployees());
 
-//        System.out.println("sort all employees with company id in ascending order");
-       getAllEmployees().sort(Comparator.comparing(employee -> employee.getCompany().getId()));
-//        System.out.println(getAllEmployees());
+        System.out.println("sort all employees with company id in ascending order");
+        getAllEmployees().sort(Comparator.comparing(employee -> employee.getCompany().getId()));
+        System.out.println(getAllEmployees());
     }
 }

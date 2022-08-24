@@ -78,4 +78,25 @@ public class Service {
         }
     }
 
+    public static PromotedEmployee findByIdAndPromote(List<Employee> employees, Function<Employee, PromotedEmployee> function, Integer employeeId) {
+        PromotedEmployee promotedEmployee = new PromotedEmployee();
+        for (Employee employee : employees) {
+            if (employee.getId().equals(employeeId)) {
+                promotedEmployee = function.apply(employee);
+            }
+        }
+        return promotedEmployee;
+    }
+
+    public static List<PromotedEmployee> filterEmployeesAndPromote(List<Employee> employees, Predicate<Employee> predicate, Function<Employee, PromotedEmployee> function) {
+        List<PromotedEmployee> promotedEmployees = new ArrayList<>();
+        for (Employee employee : employees) {
+            if (predicate.test(employee)) {
+                promotedEmployees.add(function.apply(employee));
+            }
+        }
+        return promotedEmployees;
+    }
+
+
 }
