@@ -5,7 +5,7 @@ import static lambda_sort_doublecolon_tasks.DataGenerator.*;
 import static lambda_sort_doublecolon_tasks.Service.filter;
 import static lambda_sort_doublecolon_tasks.Service.getAllEmployees;
 
-public class Main {
+public class Main_PracticeTasks {
 
     public static void main(String[] args) {
         createAllAddresses();

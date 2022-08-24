@@ -5,14 +5,15 @@ import lambda_sort_doublecolon_tasks.Gender;
 import lambda_sort_doublecolon_tasks.PromotedEmployee;
 import lambda_sort_doublecolon_tasks.Role;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static lambda_sort_doublecolon_tasks.DataGenerator.*;
-import static lambda_sort_doublecolon_tasks.solutions.Service.*;
+import static lambda_sort_doublecolon_tasks.Service.*;
 
 
-public class Main {
+public class Main_TaskSolutions {
     public static void main(String[] args) {
         createAllAddresses();
         createAllCompanies();
@@ -58,7 +59,7 @@ public class Main {
 
 
         System.out.println("show all the employees full name and corresponding age information in one list");
-        System.out.println(getSpecificAttributes(getAllEmployees(), employee -> employee.getFullName() + " | " + employee.getAge()));
+        System.out.println(getSpecificAttributesOfAllList(getAllEmployees(), employee -> employee.getFullName() + " | " + employee.getAge()));
 
         List<String> list = getAllEmployees().stream()
                 .map(employee -> employee.getFullName() + " | " + employee.getAge())
@@ -67,18 +68,18 @@ public class Main {
 
 
         System.out.println("show all the employees street city and state information with their age in one list");
-        System.out.println(getSpecificAttributes(getAllEmployees(), employee -> employee.getCompany().getAddress().getStreet() + " | " +
+        System.out.println(getSpecificAttributesOfAllList(getAllEmployees(), employee -> employee.getCompany().getAddress().getStreet() + " | " +
                 employee.getCompany().getAddress().getCity() + " | " + employee.getCompany().getAddress().getState() + " | " + employee.getAge()));
 
 
         System.out.println("***get just the fullName of all employees in list if their Id number is even***");
-        System.out.println(getIfFullName(getAllEmployees(), Employee::getFullName, employee -> employee.getId() % 2 == 0));
+        System.out.println(getFullNameWithCondition(getAllEmployees(), Employee::getFullName, employee -> employee.getId() % 2 == 0));
 
         System.out.println("***just print the employees with address id information");
         printEmployeesWithAddressId(getAllEmployees(), System.out::println, 5);
 
         System.out.println("***just print the companies if they are located in address id 2");
-        printCompaniesWithAddressId(getAllCompanies(), System.out::println, 3);
+        printCompaniesWithAddressId(getAllCompanies(), System.out::println, 2);
 
         System.out.println("***get one employee with id and promote her/him - create an PromotedEmployee object with any information");
         System.out.println(findByIdAndPromote(getAllEmployees(), employee -> new PromotedEmployee(Role.CEO, 15000, employee), 53));
@@ -116,7 +117,7 @@ public class Main {
 //        System.out.println(getAllEmployees());
 
 //        System.out.println("sort all employees with company id in ascending order");
-//        getAllEmployees().sort(Comparator.comparing(employee -> employee.getCompany().getId()));
+       getAllEmployees().sort(Comparator.comparing(employee -> employee.getCompany().getId()));
 //        System.out.println(getAllEmployees());
     }
 }

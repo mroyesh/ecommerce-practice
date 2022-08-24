@@ -36,8 +36,8 @@ public class DataGenerator {
     }
 
     public static void createAllEmployees() {
-        for (int i = 0; i < 100; i++) {
-            EMPLOYEE_LIST.add(new Employee(i + 1, FAKER.name().fullName(), Gender.MALE, (new Random().nextInt(50)) + 20, COMPANY_LIST.get(new Random().nextInt(10))));
+        for (int i = 0; i < 20; i++) {
+            EMPLOYEE_LIST.add(new Employee(i + 1, FAKER.name().fullName(), Gender.values()[new Random().nextInt(2)], (new Random().nextInt(50)) + 20, COMPANY_LIST.get(new Random().nextInt(10))));
         }
 
 //        System.out.println("***for checking your code - GET ALL EMPLOYEES***");
