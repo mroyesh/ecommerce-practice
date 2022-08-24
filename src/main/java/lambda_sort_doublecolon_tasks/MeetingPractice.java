@@ -1,8 +1,10 @@
 package lambda_sort_doublecolon_tasks;
 
 
+import java.util.List;
+
 import static lambda_sort_doublecolon_tasks.DataGenerator.*;
-import static lambda_sort_doublecolon_tasks.Service.getAllEmployees;
+import static lambda_sort_doublecolon_tasks.Service.*;
 
 public class MeetingPractice {
 
@@ -14,7 +16,19 @@ public class MeetingPractice {
         //When you start to solve new question, comment out the System.out.println statement
 
         // EXAMPLE
-        // System.out.println("*** get all employees if their Id number is odd");
+        getAllEmployees().forEach(System.out::println);
+         System.out.println("*** get all employees if their Id number is odd");
+//        List<Employee> list = filter(getAllEmployees(), employee -> employee.getId() % 2 !=0);
+//        list.forEach(System.out::println);
+
+//        getAllEmployees().forEach(employee -> {if (employee.getId() % 2 !=0){
+//            System.out.println(employee);}
+//        });
+
+        getAllEmployees().stream()
+                .filter(employee -> employee.getId() %2 !=0)
+                .forEach(System.out::println);
+
 
 
         //System.out.println("*** get all employees if their Id number is even");
