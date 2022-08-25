@@ -217,8 +217,8 @@ public class MeetingPractice_Solutions {
 //                .forEach(employee -> System.out.println(employee.getFullName()));
 
 
-        //System.out.println("***sort all employees with company name in ascending order***");
-
+//        System.out.println("***sort all employees with company name in ascending order***");
+//
 //        System.out.println("**************** solution with list.sort() + Comparator & Comparable interface **************");
 //        getAllEmployees().sort(Comparator.comparing(employee -> employee.getCompany().getCompanyName()));                     // solution with comparing + lambda
 //        getAllEmployees().sort((e1, e2) -> e1.getCompany().getCompanyName().compareTo(e2.getCompany().getCompanyName()) );    // solution with Comparable interface
