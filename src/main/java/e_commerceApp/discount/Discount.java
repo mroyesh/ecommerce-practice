@@ -3,6 +3,7 @@ package e_commerceApp.discount;
 import e_commerceApp.Cart;
 import e_commerceApp.StaticConstants;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -38,6 +39,8 @@ public abstract class Discount {
 
     public static Discount findDiscountById(String discountId) throws Exception {
         // todo convert this block to stream
+
+
         for (Discount discount : StaticConstants.DISCOUNT_LIST) {
             if (discount.getId().toString().equals(discountId)) {
                 return discount;

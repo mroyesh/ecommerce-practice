@@ -3,6 +3,8 @@ package e_commerceApp;
 import e_commerceApp.category.Category;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -56,15 +58,19 @@ public class Product {
     }
 
     public String getCategoryName() throws Exception {
+        List<Category> categories= new ArrayList<>();
+        categories.stream().filter(category -> category.getId().equals(categoryId)).forEach(System.out::println);
+
         // todo convert this block to stream
         for (Category category : StaticConstants.CATEGORY_LIST) {
-            // if(getCategoryId().toString().equals(category.getId().toString())){
+
             if (getCategoryId().equals(category.getId())) {
                 return category.getName();
             }
         }
         throw new Exception("Category not found," + getName());
     }
+
 
     public LocalDateTime getDeliveryDueDate() throws Exception {
         // todo convert this block to stream
